@@ -134,7 +134,7 @@ class BrowserView(QMainWindow):
                 url = 'http://localhost:{}'.format(BrowserView.inspector_port)
 
                 inspector = BrowserView(uid, title, url, 700, 500, True, False, (300,200),
-                                        False, '#fff', False, None, self.parent().webview_ready)
+                                        False, '#fff', False, None, self.text_select, self.parent().webview_ready)
                 inspector.show()
 
     # New-window-requests handler for Qt 5.5+ only
