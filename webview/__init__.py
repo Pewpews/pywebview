@@ -113,6 +113,14 @@ def _initialize_imports():
                 except ImportError as e:
                     # Panic
                     logger.exception('PyWin32 cannot be loaded')
+                    
+            if import_error or config.use_qt:
+                try:
+                    import webview.qt as gui
+                    logger.debug('Using QT')
+                except ImportError as e:
+                    # Panic
+                    logger.exception('QT cannot be loaded')
                     raise Exception('You must have either pythonnet or pywin32 installed in order to use this library.')
         else:
             raise Exception('Unsupported platform. Only Windows, Linux, OS X, OpenBSD are supported.')
