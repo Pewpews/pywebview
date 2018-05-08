@@ -63,7 +63,6 @@ def _initialize_imports():
                 try:
                     import webview.cocoa as gui
                 except ImportError:
-                    logger.exception('PyObjC cannot be loaded')
                     import_error = True
 
             if import_error or config.use_qt:
@@ -72,7 +71,6 @@ def _initialize_imports():
                     logger.debug('Using QT')
                 except ImportError as e:
                     # Panic
-                    logger.exception('QT cannot be loaded')
                     raise Exception('You must have either PyObjC (for Cocoa support) or Qt with Python bindings installed in order to use this library.')
 
         elif platform.system() == 'Linux' or platform.system() == 'OpenBSD':
@@ -81,7 +79,6 @@ def _initialize_imports():
                     import webview.gtk as gui
                     logger.debug('Using GTK')
                 except (ImportError, ValueError) as e:
-                    logger.exception('GTK cannot be loaded')
                     import_error = True
 
             if import_error or config.use_qt:
@@ -91,7 +88,6 @@ def _initialize_imports():
                     logger.debug('Using QT')
                 except ImportError as e:
                     # Panic
-                    logger.exception('QT cannot be loaded')
                     raise Exception('You must have either QT or GTK with Python extensions installed in order to use this library.')
 
         elif platform.system() == 'Windows':
@@ -101,7 +97,6 @@ def _initialize_imports():
                     import webview.winforms as gui
                     logger.debug('Using .NET')
                 except ImportError as e:
-                    logger.exception('pythonnet cannot be loaded')
                     import_error = True
 
 
@@ -112,7 +107,7 @@ def _initialize_imports():
                     logger.debug('Using Win32')
                 except ImportError as e:
                     # Panic
-                    logger.exception('PyWin32 cannot be loaded')
+                    pass
                     
             if import_error or config.use_qt:
                 try:
@@ -120,7 +115,6 @@ def _initialize_imports():
                     logger.debug('Using QT')
                 except ImportError as e:
                     # Panic
-                    logger.exception('QT cannot be loaded')
                     raise Exception('You must have either pythonnet or pywin32 installed in order to use this library.')
         else:
             raise Exception('Unsupported platform. Only Windows, Linux, OS X, OpenBSD are supported.')
